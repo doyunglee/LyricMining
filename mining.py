@@ -6,6 +6,7 @@ Created on Thu Feb 27 17:52:18 2014
 """
 
 from pattern.web import *
+import urllib2
 w=Wikipedia()
 from bs4 import BeautifulSoup
 
@@ -57,16 +58,19 @@ def find_all_hits(start_year, end_year):
     
     return all_hits
 
- 	
+
 def get_lyric(song_name):
-    """This function takes the song name and
+    """This function takes the song name and 
     finds the lyrics to the song using Google"""
     g = Google()
     search_phrase = 'azlyrics ' + song_name
     for result in g.search(search_phrase, type=SEARCH, start=1, count=1):
        song_website = urllib2.urlopen(result.url) #Open and read the url
-       song_page = song_website.read() #Save it into a string      
+       song_page = song_website.read() #Save it into a string       
        #Find the start and end
        start_song = song_page.find("<!-- start of lyrics -->")
        end_song = song_page.find("<!-- end of lyrics -->")
        print song_page[start_song:end_song].replace("<br />","").replace(">","").replace("<","")
+
+
+
