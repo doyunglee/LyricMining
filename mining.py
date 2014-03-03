@@ -96,21 +96,29 @@ def count_words(words):
 
 def get_max(dic, n):
     ''' 
-    returns the num n max values in a dictionary as a dictionary, assumes all values are positive numbers
+    returns the num n max values in a dictionary as a dictionary
+    assumes: all values are positive numbers, the dictionary has more than n entries
+    
     '''
+    dup_dic = dict(dic)
     maxes={}
     max_val = 0
-    for i in range(n)
-        for i in dic:
-            if val>max_val:
-                max_val = 
+    for i in range(n):
+        for key in dup_dic:
+            val = dup_dic[key]
+            if val>max_val: 
+                max_val=val
+                max_key = key
+        del dup_dic[max_key]
+        maxes[max_key]=max_val
+        max_val=0
+    return maxes
 
 def generate_trends():
     hit_lists=find_all_hits(1940, 2014)
     wc_by_year = []
     for hit_list in hits_lists:   
         wc_by_year.append(count_words(convert_to_word_mash(hit_list)))
-    
     
     
             
@@ -121,9 +129,9 @@ function that takes a list of song names and turns that into list of words
 function that takes a list of words and counts how frequently each one appears
 
 '''
-        for song in hit list:
             
-
+'''
 if __name__ == '__main__':
     list = find_all_hits(2012,2013)[0]
     print convert_to_word_mash(list)
+'''
