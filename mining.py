@@ -87,11 +87,13 @@ def convert_to_word_mash(list_of_songs):
     
 def count_words(words):
     word_count = {}
+    bad_words = ['a', 'you','I', "I'm", 'the', "me", "going", "to", "is", "and", "i", "it's", "for", "with", "your", "that", 'will', 'are']
     for word in words:
-        if word in word_count:
-            word_count[word]+=1
-        else:
-            word_count[word]=1
+        if word not in bad_words and len(word) > 2: 
+            if word in word_count:
+                word_count[word]+=1
+            else:
+                word_count[word]=1
     return word_count
 
 def get_max(dic, n):
@@ -115,11 +117,16 @@ def get_max(dic, n):
     return maxes
 
 def generate_trends():
-    hit_lists=find_all_hits(1940, 2014)
+    start_year = 2013
+    end_year = 2013
+    hit_lists=find_all_hits(start_year, end_year)
     wc_by_year = []
-    for hit_list in hits_lists:   
+    max_wc_by_year = []
+    for hit_list in hit_lists:   
         wc_by_year.append(count_words(convert_to_word_mash(hit_list)))
-    
+    for word_dic in wc_by_year:
+        max_wc_by_year.append(get_max(word_dic,5))
+    print max_wc_by_year
     
             
             
