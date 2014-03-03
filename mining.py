@@ -72,6 +72,26 @@ def get_lyric(song_name):
        end_song = song_page.find("<!-- end of lyrics -->")#find the end of the song in the website html
        return song_page[start_song:end_song].replace("<br />","").replace(">","").replace("<","").replace("/i","").replace("\n"," ").replace("!-- start of lyrics --\r"," ").replace("\r","").replace("\xe2\x80\x99","'") #replace some unneeded hodgepodge
 
+
+def count_words(words):
+    word_count = {}
+    for word in words:
+        if word in word_count:
+            word_count[word]+=1
+        else:
+            word_count[word]=1
+    return word_count
+
+
+        
+    
+'''
+function that takes a list of song names and turns that into list of words
+function that takes a list of words and counts how frequently each one appears
+
+'''
+
+
 def convert_to_word_mash(list_of_songs):
     """Takes a list of song titles and returns a list of words"""
     lyric_list = []
