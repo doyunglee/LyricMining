@@ -81,10 +81,7 @@ def count_words(words):
             word_count[word]=1
     return word_count
 
-def filter_words(word_count):
-    for key in word_count:
-        print key
-    
+
         
     
 '''
