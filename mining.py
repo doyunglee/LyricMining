@@ -68,9 +68,20 @@ def get_lyric(song_name):
        song_website = urllib2.urlopen(result.url) #Open and read the url
        song_page = song_website.read() #Save it into a string       
        #Find the start and end
-       start_song = song_page.find("<!-- start of lyrics -->")
-       end_song = song_page.find("<!-- end of lyrics -->")
-       print song_page[start_song:end_song].replace("<br />","").replace(">","").replace("<","")
+       start_song = song_page.find("<!-- start of lyrics -->")#find the beginning of the song in the website html
+       end_song = song_page.find("<!-- end of lyrics -->")#find the end of the song in the website html
+       return song_page[start_song:end_song].replace("<br />","").replace(">","").replace("<","").replace("/i","").replace("\n"," ").replace("!-- start of lyrics --\r"," ").replace("\r","").replace("\xe2\x80\x99","'") #replace some unneeded hodgepodge
 
+def convert_to_word_mash(list_of_songs):
+    """Takes a list of song titles and returns a list of words"""
+    lyric_list = []
+    for i in range(len(list_of_songs)): #goes through the list of songs and gets the lyrics for each song
+        lyric = get_lyric(list_of_songs[i])
+        lyric_list.append(lyric)            
+    string_mash = ''.join(lyric_list) #combines the list of lyrics into one big string
+    list_of_words = re.findall("[a-zA-Z']+",string_mash)#turns the string into a list of words
+    return list_of_words
 
-
+if __name__ == '__main__':
+    list = find_all_hits(2012,2013)[0]
+    print convert_to_word_mash(list)
