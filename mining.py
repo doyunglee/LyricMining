@@ -73,25 +73,6 @@ def get_lyric(song_name):
        return song_page[start_song:end_song].replace("<br />","").replace(">","").replace("<","").replace("/i","").replace("\n"," ").replace("!-- start of lyrics --\r"," ").replace("\r","").replace("\xe2\x80\x99","'") #replace some unneeded hodgepodge
 
 
-def count_words(words):
-    word_count = {}
-    for word in words:
-        if word in word_count:
-            word_count[word]+=1
-        else:
-            word_count[word]=1
-    return word_count
-
-
-
-        
-    
-'''
-function that takes a list of song names and turns that into list of words
-function that takes a list of words and counts how frequently each one appears
-
-'''
-
 
 def convert_to_word_mash(list_of_songs):
     """Takes a list of song titles and returns a list of words"""
@@ -102,6 +83,46 @@ def convert_to_word_mash(list_of_songs):
     string_mash = ''.join(lyric_list) #combines the list of lyrics into one big string
     list_of_words = re.findall("[a-zA-Z']+",string_mash)#turns the string into a list of words
     return list_of_words
+    
+    
+def count_words(words):
+    word_count = {}
+    for word in words:
+        if word in word_count:
+            word_count[word]+=1
+        else:
+            word_count[word]=1
+    return word_count
+
+def get_max(dic, n):
+    ''' 
+    returns the num n max values in a dictionary as a dictionary, assumes all values are positive numbers
+    '''
+    maxes={}
+    max_val = 0
+    for i in range(n)
+        for i in dic:
+            if val>max_val:
+                max_val = 
+
+def generate_trends():
+    hit_lists=find_all_hits(1940, 2014)
+    wc_by_year = []
+    for hit_list in hits_lists:   
+        wc_by_year.append(count_words(convert_to_word_mash(hit_list)))
+    
+    
+    
+            
+            
+    
+'''
+function that takes a list of song names and turns that into list of words
+function that takes a list of words and counts how frequently each one appears
+
+'''
+        for song in hit list:
+            
 
 if __name__ == '__main__':
     list = find_all_hits(2012,2013)[0]
