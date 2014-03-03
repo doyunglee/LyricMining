@@ -72,5 +72,26 @@ def get_lyric(song_name):
        end_song = song_page.find("<!-- end of lyrics -->")
        print song_page[start_song:end_song].replace("<br />","").replace(">","").replace("<","")
 
+def count_words(words):
+    word_count = {}
+    for word in words:
+        if word in word_count:
+            word_count[word]+=1
+        else:
+            word_count[word]=1
+    return word_count
+
+def filter_words(word_count):
+    for key in word_count:
+        print key
+    
+        
+    
+'''
+function that takes a list of song names and turns that into list of words
+function that takes a list of words and counts how frequently each one appears
+
+'''
+
 
 
