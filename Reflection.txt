@@ -1,0 +1,29 @@
+Project Overview:
+
+We are trying to figure out what is the most commonly used word in a year using the billboard top 100 singles of that year.
+We wanted to see if there were trends of word usage as years progressed and maybe delve into cultural context (what can we say about
+a year's culture from its most used word? Can we say anything about how America changes from word changes? And most importantly, we're 
+just curious. Can we get anything significant from such data?). 
+
+
+Implementation:
+
+We wikipedia searched the top billboard 100 singles of a certain year (conveniently placed in tables, which turned out to be SUPER inconvenient
+for scraping) and put the songs into a list. The list of songs is then put into a function that will search a song name into azlyrics, returning
+the lyrics of the song. We then create a list of lyrics. Then we combine all the lyrics into one big string. Then, we use regular expressions
+to create a list of words. We then use that to create a dictionary of words, with the number of times they show up as the values.
+
+
+Results:
+
+It was interesting to see from the four years we measured (due to interesting circumstances), "now" was top 6 words for all 4 years (2010-2013). 
+"Baby" only showed up in 2010 (we expected it to show up more). The appearance of "love" decreased over the 4 years, as did "don't" and
+"know." "Can" and "make" is making a rise after an initial drop (very interesting). Overall, Words tend to show up fewer times as years progressed.
+We believe this could mean that there are less unique words nowadays then previously (less originality/sophisticated lyrics). We want to look 
+into this in the future, as well as the complexity of words.
+
+Reflection:
+
+Things went pretty well for the team. We split up functions very well (and convenient for working separately). We communicated well as to
+what each function took in and outputted, which was nice. We had some issues with Google not letting us search anything at one point, so 
+we couldn't do as much analysis as we wanted to. However, this is a pretty cool topic that we want to explore further. 
