@@ -1,3 +1,11 @@
+# As projects get larger and have multiple modules.
+# it becomes helpful to add a nice little comment
+# up here to let a reader know what the file is
+# meant to do. On examination, my understanding is
+# that mining.py and mining2.py are in fact the same
+# thing. It might be nice to either clean
+# that up by deleting one, or to explain the
+# difference up here.
 
 # -*- coding: utf-8 -*-
 """
@@ -48,6 +56,8 @@ def find_all_hits(start_year, end_year):
             page =  w.search('List of Billboard Hot 100 number-one singles of '+str(year)) 
         elif year == 1958:
             page =  w.search('List of Billboard number-one singles of '+str(year)) 
+            # I'm curious as to what makes this different than the below elif statement and why you
+            # didn't roll this into the below elif as year<=1958 and year>=1940
         elif year<1958 and year>=1940:
             page =  w.search('List of Billboard number-one singles of '+str(year)) 
         if page.sections[0].tables!=[]:
@@ -55,6 +65,8 @@ def find_all_hits(start_year, end_year):
         else:
             page_html = page.sections[1].html
         soup = BeautifulSoup(page_html)
+        # Consider breaking this up with some whitespace here! This block of
+        # solid code is really hard for a reader to visually process!
         tables = soup.find_all('table') #find all the tables in chart history section, could be table of hits or table of hits preceded by a key        
         for t in tables:
             if t.findAll('th')!=[]:
@@ -74,6 +86,11 @@ def find_all_hits(start_year, end_year):
     
     return all_hits
 
+# This entire function a bit convoluted and hard to follow: I understand it might take all of this to
+# extract the data you care about from all of the wrapping information, but it could possibly
+# be made a bit easier to read and understand with some whitespacce, or even possibly being split into
+# two functions: one to retrieve the "soup" of each page, and one to parse the tables in the soup.
+
 
 def get_lyric(song_name):
     """This function takes the song name and 
@@ -92,6 +109,10 @@ def get_lyric(song_name):
     '''
     #return all_songs[song_name]
 
+    # Is this dead code or did you only have to use it once and didn't want it to run again?
+    # If its the former, you normally want to take this out for the submitted version of your code.
+    # If its the latter, you can probably either leave it in or put it in a seperate setup module
+    # that you only run once. (Or you can just leave it here and not run it again).
 
 def convert_to_word_mash(list_of_songs):
     """Takes a list of song titles and returns a list of words"""
@@ -106,6 +127,8 @@ def convert_to_word_mash(list_of_songs):
 def count_words(words):
     word_count = {}
     bad_words = ["i'll",'got', 'this', 'what', 'get',"you're", 'from', 'yeah', 'but', 'when', 'like', 'just', 'all', 'a', 'you','i', "i'm", 'the', "me", "going", "to", "is", "and", "i", "it's", "for", "with", "your", "that", 'are']
+    # You might want to write some of which words you omitted up in your reflection if they're hard coded in like this so that the reader is aware of
+    # things that they will never see in your code. I assumed something like this existed but I didn't see it in the writeup. Just a note for future projects.
     for word in words:
         if word not in bad_words and len(word) > 1: 
             if word in word_count:
@@ -120,7 +143,12 @@ def get_max(dic, n):
     assumes: all values are positive numbers, the dictionary has more than n entries
     
     '''
-    dup_dic = dict(dic)
+    dup_dic = dict(dic) 
+    # This would be a great place to use dict.keys() which returns
+    # the keys of a dictionary as a list. The Counter module in the
+    # collections module is a great tool for finding the modes of a list.
+    # It saves the duplication and deletion that you perform here and
+    # most likely would result in more succinct, easier to follow code.
     maxes={}
     max_val = 0
     for i in range(n):
@@ -143,6 +171,7 @@ def generate_trends():
     for hit_list in hit_lists:   
         wc_by_year.append(count_words(convert_to_word_mash(hit_list)))
         print "do: "+str(wc_by_year[len(wc_by_year)-1]["dance"])+"dont: "+" "+str(wc_by_year[len(wc_by_year)-1]["party"])
+        # What does this mean? This could use a comment, or be changed to take multiple, readable lines
     for word_dic in wc_by_year:
         max_wc_by_year.append(get_max(word_dic,6))
     print max_wc_by_year
@@ -161,3 +190,5 @@ if __name__ == '__main__':
     list = find_all_hits(2012,2013)[0]
     print convert_to_word_mash(list)
 '''
+# Why comment this? Seems like good stuff to have in here so that someone can run your code easily.
+# Is it for fear that someone will overwrite the data you've collected?
